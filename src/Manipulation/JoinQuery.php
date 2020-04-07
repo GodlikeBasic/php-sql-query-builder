@@ -318,8 +318,8 @@ class JoinQuery
     {
         $joins = $this->joins;
 
-        foreach ($this->joins as $joins) {
-            foreach ($joins as $join) {
+        foreach ($this->joins as $sub_joins) {
+            foreach ($sub_joins as $join) {
                 $joins = \array_merge($joins, $join->getAllJoins());
             }
         }
