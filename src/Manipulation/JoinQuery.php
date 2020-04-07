@@ -316,11 +316,11 @@ class JoinQuery
      */
     public function getAllJoins()
     {
-        $joins = $this->joins;
+        $joins = [];
 
         foreach ($this->joins as $sub_joins) {
             foreach ($sub_joins as $join) {
-                $joins = \array_merge($joins, $join->getAllJoins());
+                $joins = \array_merge($joins, [$join], $join->getAllJoins());
             }
         }
 
