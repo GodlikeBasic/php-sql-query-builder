@@ -8,12 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Builder;
+namespace Tests\Sql\QueryBuilder\Builder;
 
-use NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Select;
+use Sql\QueryBuilder\Builder\GenericBuilder;
+use Sql\QueryBuilder\Manipulation\Select;
 
-class GenericBuilderTest extends \PHPUnit_Framework_TestCase
+class GenericBuilderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var GenericBuilder
@@ -23,7 +23,7 @@ class GenericBuilderTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->writer = new GenericBuilder();
     }
@@ -33,7 +33,7 @@ class GenericBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldCreateSelectObject()
     {
-        $className = '\NilPortugues\Sql\QueryBuilder\Manipulation\Select';
+        $className = '\Sql\QueryBuilder\Manipulation\Select';
         $this->assertInstanceOf($className, $this->writer->select());
     }
 
@@ -42,7 +42,7 @@ class GenericBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldCreateInsertObject()
     {
-        $className = '\NilPortugues\Sql\QueryBuilder\Manipulation\Insert';
+        $className = '\Sql\QueryBuilder\Manipulation\Insert';
         $this->assertInstanceOf($className, $this->writer->insert());
     }
 
@@ -51,7 +51,7 @@ class GenericBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldCreateUpdateObject()
     {
-        $className = '\NilPortugues\Sql\QueryBuilder\Manipulation\Update';
+        $className = '\Sql\QueryBuilder\Manipulation\Update';
         $this->assertInstanceOf($className, $this->writer->update());
     }
 
@@ -60,7 +60,7 @@ class GenericBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldCreateDeleteObject()
     {
-        $className = '\NilPortugues\Sql\QueryBuilder\Manipulation\Delete';
+        $className = '\Sql\QueryBuilder\Manipulation\Delete';
         $this->assertInstanceOf($className, $this->writer->delete());
     }
 
@@ -69,7 +69,7 @@ class GenericBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldCreateIntersectObject()
     {
-        $className = '\NilPortugues\Sql\QueryBuilder\Manipulation\Intersect';
+        $className = '\Sql\QueryBuilder\Manipulation\Intersect';
         $this->assertInstanceOf($className, $this->writer->intersect());
     }
 
@@ -78,7 +78,7 @@ class GenericBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldCreateMinusObject()
     {
-        $className = '\NilPortugues\Sql\QueryBuilder\Manipulation\Minus';
+        $className = '\Sql\QueryBuilder\Manipulation\Minus';
         $this->assertInstanceOf($className, $this->writer->minus(new Select('table1'), new Select('table2')));
     }
 
@@ -87,7 +87,7 @@ class GenericBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldCreateUnionObject()
     {
-        $className = '\NilPortugues\Sql\QueryBuilder\Manipulation\Union';
+        $className = '\Sql\QueryBuilder\Manipulation\Union';
         $this->assertInstanceOf($className, $this->writer->union());
     }
 
@@ -96,7 +96,7 @@ class GenericBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldCreateUnionAllObject()
     {
-        $className = '\NilPortugues\Sql\QueryBuilder\Manipulation\UnionAll';
+        $className = '\Sql\QueryBuilder\Manipulation\UnionAll';
         $this->assertInstanceOf($className, $this->writer->unionAll());
     }
 
@@ -114,6 +114,7 @@ class GenericBuilderTest extends \PHPUnit_Framework_TestCase
         ];
 
         foreach ($queries as $type => $query) {
+            $this->assertIsObject( $query->getTable(), "Checking table in $type query");
             $this->assertEquals($table, $query->getTable()->getName(), "Checking table in $type query");
         }
     }

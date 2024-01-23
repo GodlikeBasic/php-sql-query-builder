@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Builder\Syntax;
+namespace Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Insert;
-use NilPortugues\Sql\QueryBuilder\Manipulation\QueryException;
+use Sql\QueryBuilder\Builder\GenericBuilder;
+use Sql\QueryBuilder\Manipulation\Insert;
+use Sql\QueryBuilder\Manipulation\QueryException;
 
 /**
  * Class InsertWriter.

@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Syntax;
+namespace Sql\QueryBuilder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Manipulation\QueryException;
+use Sql\QueryBuilder\Manipulation\QueryException;
 
 /**
  * Class Column.
@@ -22,24 +22,25 @@ class Column implements QueryPartInterface
     /**
      * @var Table
      */
-    protected $table;
+    protected Table $table;
 
     /**
      * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $alias;
+    protected string|null $alias;
 
     /**
-     * @param string $name
-     * @param string $table
-     * @param string $alias
+     * @param null $name
+     * @param string|null  $table
+     * @param string|null $alias
+     * @throws QueryException
      */
-    public function __construct($name, $table, $alias = '')
+    public function __construct(string $name, ?string $table, ?string $alias = '')
     {
         $this->setName($name);
         $this->setTable($table);
@@ -49,7 +50,7 @@ class Column implements QueryPartInterface
     /**
      * @return string
      */
-    public function partName()
+    public function partName(): string
     {
         return 'COLUMN';
     }
@@ -57,7 +58,7 @@ class Column implements QueryPartInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -67,7 +68,7 @@ class Column implements QueryPartInterface
      *
      * @return $this
      */
-    public function setName($name)
+    public function setName(string $name): static
     {
         $this->name = (string) $name;
 
@@ -77,19 +78,19 @@ class Column implements QueryPartInterface
     /**
      * @return Table
      */
-    public function getTable()
+    public function getTable(): Table
     {
         return $this->table;
     }
 
     /**
-     * @param string $table
+     * @param string|null $table
      *
      * @return $this
      */
-    public function setTable($table)
+    public function setTable(?string $table): static
     {
-        $this->table = $table;
+        $this->table = SyntaxFactory::createTable($table);
 
         return $this;
     }
@@ -103,13 +104,13 @@ class Column implements QueryPartInterface
     }
 
     /**
-     * @param null|string $alias
+     * @param string|null $alias
      *
      * @return $this
      *
      * @throws QueryException
      */
-    public function setAlias($alias)
+    public function setAlias(?string $alias): static
     {
         if ($alias === null || 0 == \strlen($alias)) {
             $this->alias = null;

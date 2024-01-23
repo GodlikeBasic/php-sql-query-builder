@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Builder;
+namespace Sql\QueryBuilder\Builder;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\Column;
-use NilPortugues\Sql\QueryBuilder\Syntax\Table;
+use Sql\QueryBuilder\Syntax\Column;
+use Sql\QueryBuilder\Syntax\Table;
 
 /**
  * Class MySqlBuilder.
@@ -31,7 +31,7 @@ class MySqlBuilder extends GenericBuilder
             return '*';
         }
 
-        if (false !== strpos($column->getName(), '(')) {
+        if (str_contains($column->getName(), '(')) {
             return parent::writeColumnName($column);
         }
 

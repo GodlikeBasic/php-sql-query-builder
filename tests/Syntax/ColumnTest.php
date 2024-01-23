@@ -8,25 +8,25 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Syntax;
+namespace Tests\Sql\QueryBuilder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\Column;
-use NilPortugues\Sql\QueryBuilder\Syntax\Table;
+use Sql\QueryBuilder\Syntax\Column;
+use Sql\QueryBuilder\Syntax\Table;
 
 /**
  * Class ColumnTest.
  */
-class ColumnTest extends \PHPUnit_Framework_TestCase
+class ColumnTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var string
      */
-    protected $tableClass = '\NilPortugues\Sql\QueryBuilder\Syntax\Table';
+    protected $tableClass = '\Sql\QueryBuilder\Syntax\Table';
 
     /**
      * @var string
      */
-    protected $queryException = '\NilPortugues\Sql\QueryBuilder\Manipulation\QueryException';
+    protected $queryException = '\Sql\QueryBuilder\Manipulation\QueryException';
 
     /**
      * @test
@@ -89,7 +89,7 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldThrowExceptionIfAliasOnAllSelection()
     {
-        $this->setExpectedException($this->queryException);
+        $this->expectException($this->queryException);
 
         new Column('*', 'user', 'userId');
     }

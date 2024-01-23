@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Manipulation;
+namespace Sql\QueryBuilder\Manipulation;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\Where;
+use Sql\QueryBuilder\Syntax\Where;
 
 /**
  * Class QueryFactory.
@@ -18,8 +18,8 @@ use NilPortugues\Sql\QueryBuilder\Syntax\Where;
 final class QueryFactory
 {
     /**
-     * @param string $table
-     * @param array  $columns
+     * @param null $table
+     * @param array|null $columns
      *
      * @return Select
      */
@@ -29,8 +29,8 @@ final class QueryFactory
     }
 
     /**
-     * @param string $table
-     * @param array  $values
+     * @param null $table
+     * @param array|null $values
      *
      * @return Insert
      */
@@ -40,8 +40,8 @@ final class QueryFactory
     }
 
     /**
-     * @param string $table
-     * @param array  $values
+     * @param null $table
+     * @param array|null $values
      *
      * @return Update
      */

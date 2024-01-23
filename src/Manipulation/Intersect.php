@@ -8,9 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Manipulation;
+namespace Sql\QueryBuilder\Manipulation;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\QueryPartInterface;
+use Sql\QueryBuilder\Syntax\QueryPartInterface;
+use Sql\QueryBuilder\Syntax\Table;
 
 /**
  * Class Intersect.
@@ -55,9 +56,9 @@ class Intersect implements QueryInterface, QueryPartInterface
     /**
      * @throws QueryException
      *
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Table
+     * @return Table
      */
-    public function getTable()
+    public function getTable(): Table
     {
         throw new QueryException('INTERSECT does not support tables');
     }
@@ -65,7 +66,7 @@ class Intersect implements QueryInterface, QueryPartInterface
     /**
      * @throws QueryException
      *
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Where
+     * @return \Sql\QueryBuilder\Syntax\Where
      */
     public function getWhere()
     {
@@ -75,7 +76,7 @@ class Intersect implements QueryInterface, QueryPartInterface
     /**
      * @throws QueryException
      *
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Where
+     * @return \Sql\QueryBuilder\Syntax\Where
      */
     public function where()
     {

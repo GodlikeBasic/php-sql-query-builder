@@ -8,20 +8,20 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Syntax;
+namespace Tests\Sql\QueryBuilder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\Column;
-use NilPortugues\Sql\QueryBuilder\Syntax\OrderBy;
+use Sql\QueryBuilder\Syntax\Column;
+use Sql\QueryBuilder\Syntax\OrderBy;
 
 /**
  * Class OrderByTest.
  */
-class OrderByTest extends \PHPUnit_Framework_TestCase
+class OrderByTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var string
      */
-    protected $columnClass = '\NilPortugues\Sql\QueryBuilder\Syntax\Column';
+    protected $columnClass = '\Sql\QueryBuilder\Syntax\Column';
 
     /**
      * @test
@@ -57,7 +57,7 @@ class OrderByTest extends \PHPUnit_Framework_TestCase
         $column = new Column('registration_date', 'user');
         $order = new OrderBy($column, OrderBy::ASC);
 
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->expectException('\InvalidArgumentException');
         $order->setDirection('this is not a valid direction');
     }
 }

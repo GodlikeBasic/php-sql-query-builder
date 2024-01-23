@@ -8,9 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Manipulation;
+namespace Sql\QueryBuilder\Manipulation;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\QueryPartInterface;
+use Sql\QueryBuilder\Syntax\QueryPartInterface;
+use Sql\QueryBuilder\Syntax\Table;
 
 /**
  * Class AbstractSetQuery.
@@ -45,9 +46,9 @@ abstract class AbstractSetQuery implements QueryInterface, QueryPartInterface
     /**
      * @throws QueryException
      *
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Table
+     * @return null|Table
      */
-    public function getTable()
+    public function getTable(): null|Table
     {
         throw new QueryException(
             \sprintf('%s does not support tables', $this->partName())
@@ -57,7 +58,7 @@ abstract class AbstractSetQuery implements QueryInterface, QueryPartInterface
     /**
      * @throws QueryException
      *
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Where
+     * @return \Sql\QueryBuilder\Syntax\Where
      */
     public function getWhere()
     {
@@ -69,7 +70,7 @@ abstract class AbstractSetQuery implements QueryInterface, QueryPartInterface
     /**
      * @throws QueryException
      *
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Where
+     * @return \Sql\QueryBuilder\Syntax\Where
      */
     public function where()
     {

@@ -8,15 +8,15 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Builder\Syntax;
+namespace Tests\Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Delete;
+use Sql\QueryBuilder\Builder\GenericBuilder;
+use Sql\QueryBuilder\Manipulation\Delete;
 
 /**
  * Class DeleteWriterTest.
  */
-class DeleteWriterTest extends \PHPUnit_Framework_TestCase
+class DeleteWriterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var GenericBuilder
@@ -31,7 +31,7 @@ class DeleteWriterTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->writer = new GenericBuilder();
         $this->query = new Delete();

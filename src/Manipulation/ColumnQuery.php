@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Manipulation;
+namespace Sql\QueryBuilder\Manipulation;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\Column;
-use NilPortugues\Sql\QueryBuilder\Syntax\OrderBy;
-use NilPortugues\Sql\QueryBuilder\Syntax\SyntaxFactory;
+use Sql\QueryBuilder\Syntax\Column;
+use Sql\QueryBuilder\Syntax\OrderBy;
+use Sql\QueryBuilder\Syntax\SyntaxFactory;
 
 /**
  * Class ColumnQuery.
@@ -55,9 +55,9 @@ class ColumnQuery
     protected $joinQuery;
 
     /**
-     * @param Select    $select
+     * @param Select $select
      * @param JoinQuery $joinQuery
-     * @param array     $columns
+     * @param array|null $columns
      */
     public function __construct(Select $select, JoinQuery $joinQuery, array $columns = null)
     {
@@ -87,7 +87,7 @@ class ColumnQuery
     /**
      * @param string $whereOperator
      *
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Where
+     * @return \Sql\QueryBuilder\Syntax\Where
      */
     public function where($whereOperator = 'AND')
     {
@@ -219,6 +219,9 @@ class ColumnQuery
 
     /**
      * @return array
+     * @throws QueryException
+     * @throws QueryException
+     * @throws QueryException
      */
     public function getAllColumns()
     {
@@ -235,11 +238,11 @@ class ColumnQuery
     }
 
     /**
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Column
+     * @return array
      *
      * @throws QueryException
      */
-    public function getColumns()
+    public function getColumns(): array
     {
         if (\is_null($this->select->getTable())) {
             throw new QueryException('No table specified for the Select instance');

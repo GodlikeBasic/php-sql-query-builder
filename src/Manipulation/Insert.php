@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Manipulation;
+namespace Sql\QueryBuilder\Manipulation;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\SyntaxFactory;
+use Sql\QueryBuilder\Syntax\SyntaxFactory;
 
 /**
  * Class Insert.
@@ -20,7 +20,7 @@ class Insert extends AbstractCreationalQuery
     /**
      * @return string
      */
-    public function partName()
+    public function partName(): string
     {
         return 'INSERT';
     }

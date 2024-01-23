@@ -22,32 +22,32 @@
     ],
     "autoload":{
         "psr-4":{
-            "NilPortugues\\Sql\\QueryBuilder\\":"src/"
+            "Sql\\QueryBuilder\\":"src/"
         }
     },
     "autoload-dev":{
         "psr-4":{
-            "NilPortugues\\Tests\\Sql\\QueryBuilder\\":"tests/"
+            "Tests\\Sql\\QueryBuilder\\":"tests/"
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:GodlikeBasic/php-sql-query-formatter.git"
+        }
+    ],
     "require":
     {
-        "php": ">=5.5",
-        "nilportugues/sql-query-formatter": "~1.2"
+        "php": ">=8.1",
+        "nilportugues/sql-query-formatter": "2.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.*",
-        "fabpot/php-cs-fixer": "~1.9",
-        "nilportugues/php_backslasher": "~0.2"
+        "phpunit/phpunit": "9.*",
+        "fabpot/php-cs-fixer": "3.*"
     },
     "config":
     {
         "bin-dir": "bin"
     },
-    "minimum-stability": "stable",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
-    }
+    "minimum-stability": "stable"
 }

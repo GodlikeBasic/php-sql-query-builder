@@ -8,13 +8,14 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Builder\Syntax;
+namespace Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Select;
-use NilPortugues\Sql\QueryBuilder\Syntax\Column;
-use NilPortugues\Sql\QueryBuilder\Syntax\OrderBy;
-use NilPortugues\Sql\QueryBuilder\Syntax\SyntaxFactory;
+use Sql\QueryBuilder\Builder\GenericBuilder;
+use Sql\QueryBuilder\Manipulation\QueryException;
+use Sql\QueryBuilder\Manipulation\Select;
+use Sql\QueryBuilder\Syntax\Column;
+use Sql\QueryBuilder\Syntax\OrderBy;
+use Sql\QueryBuilder\Syntax\SyntaxFactory;
 
 /**
  * Class SelectWriter.
@@ -80,10 +81,13 @@ class SelectWriter extends AbstractBaseWriter
     }
 
     /**
-     * @param Select   $select
+     * @param Select $select
      * @param string[] $parts
      *
      * @return $this
+     * @throws QueryException
+     * @throws QueryException
+     * @throws QueryException
      */
     public function writeSelectColumns(Select $select, array &$parts)
     {
@@ -291,7 +295,7 @@ class SelectWriter extends AbstractBaseWriter
      * @param GenericBuilder    $writer
      * @param PlaceholderWriter $placeholder
      *
-     * @return mixed
+     * @return array
      */
     protected function getHavingConditions(
         array &$havingArray,
@@ -382,7 +386,7 @@ class SelectWriter extends AbstractBaseWriter
      */
     protected function getStartingLimit(Select $select)
     {
-        return (null === $select->getLimitStart() || 0 == $select->getLimitStart()) ? '0' : '1';
+        return (0 == $select->getLimitStart()) ? '0' : '1';
     }
 
     /**

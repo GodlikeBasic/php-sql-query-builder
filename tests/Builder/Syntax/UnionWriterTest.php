@@ -7,17 +7,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace NilPortugues\Tests\Sql\QueryBuilder\Builder\Syntax;
+namespace Tests\Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder;
-use NilPortugues\Sql\QueryBuilder\Builder\Syntax\UnionWriter;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Union;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Select;
+use Sql\QueryBuilder\Builder\GenericBuilder;
+use Sql\QueryBuilder\Builder\Syntax\UnionWriter;
+use Sql\QueryBuilder\Manipulation\Union;
+use Sql\QueryBuilder\Manipulation\Select;
 
 /**
  * Class UnionWriterTest.
  */
-class UnionWriterTest extends \PHPUnit_Framework_TestCase
+class UnionWriterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var UnionWriter
@@ -32,13 +32,13 @@ class UnionWriterTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->unionWriter = new UnionWriter(new GenericBuilder());
         $this->writer = new GenericBuilder();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->unionWriter = null;
         $this->writer = null;

@@ -8,15 +8,15 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Manipulation;
+namespace Tests\Sql\QueryBuilder\Manipulation;
 
-use NilPortugues\Sql\QueryBuilder\Manipulation\Select;
-use NilPortugues\Sql\QueryBuilder\Syntax\OrderBy;
+use Sql\QueryBuilder\Manipulation\Select;
+use Sql\QueryBuilder\Syntax\OrderBy;
 
 /**
  * Class SelectTest.
  */
-class SelectTest extends \PHPUnit_Framework_TestCase
+class SelectTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Select
@@ -25,7 +25,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->query = new Select();
     }

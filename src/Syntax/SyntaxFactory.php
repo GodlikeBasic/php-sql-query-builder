@@ -8,7 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Syntax;
+namespace Sql\QueryBuilder\Syntax;
+
+use Sql\QueryBuilder\Manipulation\QueryException;
 
 /**
  * Class SyntaxFactory.
@@ -18,10 +20,13 @@ final class SyntaxFactory
     /**
      * Creates a collection of Column objects.
      *
-     * @param array      $arguments
+     * @param array $arguments
      * @param Table|null $table
      *
      * @return array
+     * @throws QueryException
+     * @throws QueryException
+     * @throws QueryException
      */
     public static function createColumns(array &$arguments, $table = null)
     {
@@ -47,10 +52,11 @@ final class SyntaxFactory
     /**
      * Creates a Column object.
      *
-     * @param array      $argument
+     * @param array $argument
      * @param null|Table $table
      *
      * @return Column
+     * @throws QueryException
      */
     public static function createColumn(array &$argument, $table = null)
     {
@@ -60,7 +66,7 @@ final class SyntaxFactory
         $columnAlias = \array_keys($argument);
         $columnAlias = $columnAlias[0];
 
-        if (\is_numeric($columnAlias) || \strpos($columnName, '*') !== false) {
+        if (\is_numeric($columnAlias) || str_contains($columnName, '*')) {
             $columnAlias = null;
         }
 
@@ -70,16 +76,16 @@ final class SyntaxFactory
     /**
      * Creates a Table object.
      *
-     * @param string[] $table
+     * @param array|string|null $table
      *
      * @return Table
      */
-    public static function createTable($table)
+    public static function createTable(array|string|null $table): Table
     {
         $tableName = $table;
-        if (\is_array($table)) {
-            $tableName = \current($table);
-            $tableAlias = \key($table);
+        if (is_array($table)) {
+            $tableName = current($table);
+            $tableAlias = key($table);
         }
 
         $newTable = new Table($tableName);

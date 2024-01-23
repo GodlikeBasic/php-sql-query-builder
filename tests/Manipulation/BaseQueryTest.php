@@ -8,27 +8,27 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Manipulation;
+namespace Tests\Sql\QueryBuilder\Manipulation;
 
 /**
  * Class BaseQueryTest.
  */
-class BaseQueryTest extends \PHPUnit_Framework_TestCase
+class BaseQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var \NilPortugues\Tests\Sql\QueryBuilder\Manipulation\Resources\DummyQuery
+     * @var \Tests\Sql\QueryBuilder\Manipulation\Resources\DummyQuery
      */
     private $query;
 
     /**
      * @var string
      */
-    private $whereClass = '\NilPortugues\Sql\QueryBuilder\Syntax\Where';
+    private $whereClass = '\Sql\QueryBuilder\Syntax\Where';
 
     /**
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->query = new Resources\DummyQuery();
         $this->query->setTable('tablename');
@@ -37,7 +37,7 @@ class BaseQueryTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->query = null;
     }

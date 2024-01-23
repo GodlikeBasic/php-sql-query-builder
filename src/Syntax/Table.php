@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Syntax;
+namespace Sql\QueryBuilder\Syntax;
 
 /**
  * Class Table.
@@ -53,7 +53,7 @@ class Table
      */
     public function __toString()
     {
-        return (string) $this->name;
+        return $this->name;
     }
 
     /**
@@ -124,7 +124,6 @@ class Table
     }
 
     /**
-     * @param string
      * @param string $schema
      *
      * @return $this

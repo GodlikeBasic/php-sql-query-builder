@@ -8,17 +8,17 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Builder\Syntax;
+namespace Tests\Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder;
-use NilPortugues\Sql\QueryBuilder\Builder\Syntax\MinusWriter;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Minus;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Select;
+use Sql\QueryBuilder\Builder\GenericBuilder;
+use Sql\QueryBuilder\Builder\Syntax\MinusWriter;
+use Sql\QueryBuilder\Manipulation\Minus;
+use Sql\QueryBuilder\Manipulation\Select;
 
 /**
  * Class MinusWriterTest.
  */
-class MinusWriterTest extends \PHPUnit_Framework_TestCase
+class MinusWriterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var MinusWriter
@@ -33,13 +33,13 @@ class MinusWriterTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->minusWriter = new MinusWriter(new GenericBuilder());
         $this->writer = new GenericBuilder();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->minusWriter = null;
         $this->writer = null;

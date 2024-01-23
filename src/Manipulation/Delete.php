@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Manipulation;
+namespace Sql\QueryBuilder\Manipulation;
 
 /**
  * Class Delete.
@@ -18,7 +18,7 @@ class Delete extends AbstractBaseQuery
     /**
      * @var int
      */
-    protected $limitStart;
+    protected int $limitStart;
 
     /**
      * @param string $table
@@ -33,7 +33,7 @@ class Delete extends AbstractBaseQuery
     /**
      * @return string
      */
-    public function partName()
+    public function partName(): string
     {
         return 'DELETE';
     }
@@ -41,9 +41,9 @@ class Delete extends AbstractBaseQuery
     /**
      * @return int
      */
-    public function getLimitStart()
+    public function getLimitStart(): int|null
     {
-        return $this->limitStart;
+        return $this->limitStart ?? null;
     }
 
     /**

@@ -8,12 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Builder\Syntax;
+namespace Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Select;
-use NilPortugues\Sql\QueryBuilder\Syntax\Column;
-use NilPortugues\Sql\QueryBuilder\Syntax\SyntaxFactory;
+use Sql\QueryBuilder\Builder\GenericBuilder;
+use Sql\QueryBuilder\Manipulation\Select;
+use Sql\QueryBuilder\Syntax\Column;
+use Sql\QueryBuilder\Syntax\SyntaxFactory;
 
 /**
  * Class ColumnWriter.
@@ -21,7 +21,7 @@ use NilPortugues\Sql\QueryBuilder\Syntax\SyntaxFactory;
 class ColumnWriter
 {
     /**
-     * @var \NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder
+     * @var \Sql\QueryBuilder\Builder\GenericBuilder
      */
     protected $writer;
 
@@ -61,9 +61,9 @@ class ColumnWriter
      * @param array        $selectAsColumns
      * @param SelectWriter $selectWriter
      *
-     * @return mixed
+     * @return array
      */
-    protected function selectColumnToQuery(array &$selectAsColumns, SelectWriter $selectWriter)
+    protected function selectColumnToQuery(array &$selectAsColumns, SelectWriter $selectWriter): array
     {
         \array_walk(
             $selectAsColumns,

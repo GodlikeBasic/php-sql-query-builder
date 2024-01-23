@@ -7,17 +7,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace NilPortugues\Tests\Sql\QueryBuilder\Builder\Syntax;
+namespace Tests\Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder;
-use NilPortugues\Sql\QueryBuilder\Builder\Syntax\IntersectWriter;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Intersect;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Select;
+use Sql\QueryBuilder\Builder\GenericBuilder;
+use Sql\QueryBuilder\Builder\Syntax\IntersectWriter;
+use Sql\QueryBuilder\Manipulation\Intersect;
+use Sql\QueryBuilder\Manipulation\Select;
 
 /**
  * Class IntersectWriterTest.
  */
-class IntersectWriterTest extends \PHPUnit_Framework_TestCase
+class IntersectWriterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var GenericBuilder
@@ -32,13 +32,13 @@ class IntersectWriterTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->intersectWriter = new IntersectWriter(new GenericBuilder());
         $this->writer = new GenericBuilder();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->intersectWriter = null;
         $this->writer = null;

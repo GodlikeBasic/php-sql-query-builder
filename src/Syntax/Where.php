@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection ALL */
+
 /**
  * Author: Nil Portugués Calderó <contact@nilportugues.com>
  * Date: 6/3/14
@@ -8,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Syntax;
+namespace Sql\QueryBuilder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Manipulation\QueryException;
-use NilPortugues\Sql\QueryBuilder\Manipulation\QueryFactory;
-use NilPortugues\Sql\QueryBuilder\Manipulation\QueryInterface;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Select;
+use Sql\QueryBuilder\Manipulation\QueryException;
+use Sql\QueryBuilder\Manipulation\QueryFactory;
+use Sql\QueryBuilder\Manipulation\QueryInterface;
+use Sql\QueryBuilder\Manipulation\Select;
 
 /**
  * Class Where.
@@ -93,7 +94,7 @@ class Where
     /**
      * @var Table
      */
-    protected $table;
+    protected Table $table;
 
     /**
      * @var array
@@ -191,10 +192,11 @@ class Where
      * @param $operator
      *
      * @return Where
+     * @throws QueryException
+     * @throws QueryException
      */
     public function subWhere($operator = 'OR')
     {
-        /** @var Where $filter */
         $filter = QueryFactory::createWhere($this->query);
         $filter->conjunction($operator);
         $filter->setTable($this->getTable());
@@ -215,11 +217,11 @@ class Where
     /**
      * Used for subWhere query building.
      *
-     * @param Table $table string
+     * @param Table $table
      *
      * @return $this
      */
-    public function setTable($table)
+    public function setTable(Table $table)
     {
         $this->table = $table;
 

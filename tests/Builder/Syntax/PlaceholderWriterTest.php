@@ -8,14 +8,14 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Builder\Syntax;
+namespace Tests\Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Builder\Syntax\PlaceholderWriter;
+use Sql\QueryBuilder\Builder\Syntax\PlaceholderWriter;
 
 /**
  * Class PlaceholderWriterTest.
  */
-class PlaceholderWriterTest extends \PHPUnit_Framework_TestCase
+class PlaceholderWriterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var PlaceholderWriter
@@ -25,7 +25,7 @@ class PlaceholderWriterTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->writer = new PlaceholderWriter();
     }

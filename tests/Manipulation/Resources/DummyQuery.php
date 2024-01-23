@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Manipulation\Resources;
+namespace Tests\Sql\QueryBuilder\Manipulation\Resources;
 
-use NilPortugues\Sql\QueryBuilder\Manipulation\AbstractBaseQuery;
+use Sql\QueryBuilder\Manipulation\AbstractBaseQuery;
 
 /**
  * Class DummyQuery.
@@ -20,7 +20,7 @@ class DummyQuery extends AbstractBaseQuery
     /**
      * @return string
      */
-    public function partName()
+    public function partName(): string
     {
         return 'DUMMY';
     }

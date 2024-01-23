@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Builder\Syntax;
+namespace Sql\QueryBuilder\Builder\Syntax;
 
 /**
  * Class PlaceholderWriter.

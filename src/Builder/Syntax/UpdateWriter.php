@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Builder\Syntax;
+namespace Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Manipulation\QueryException;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Update;
-use NilPortugues\Sql\QueryBuilder\Syntax\SyntaxFactory;
+use Sql\QueryBuilder\Manipulation\QueryException;
+use Sql\QueryBuilder\Manipulation\Update;
+use Sql\QueryBuilder\Syntax\SyntaxFactory;
 
 /**
  * Class UpdateWriter.

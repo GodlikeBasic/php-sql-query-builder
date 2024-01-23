@@ -8,12 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Manipulation;
+namespace Sql\QueryBuilder\Manipulation;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\SyntaxFactory;
-use NilPortugues\Sql\QueryBuilder\Syntax\Table;
-use NilPortugues\Sql\QueryBuilder\Syntax\Where;
-use NilPortugues\Sql\QueryBuilder\Syntax\OrderBy;
+use Sql\QueryBuilder\Syntax\SyntaxFactory;
+use Sql\QueryBuilder\Syntax\Table;
+use Sql\QueryBuilder\Syntax\Where;
+use Sql\QueryBuilder\Syntax\OrderBy;
 
 /**
  * Class Select.
@@ -23,17 +23,17 @@ class Select extends AbstractBaseQuery
     /**
      * @var Table
      */
-    protected $table;
+    protected Table $table;
 
     /**
      * @var array
      */
-    protected $groupBy = [];
+    protected array $groupBy = [];
 
     /**
      * @var string
      */
-    protected $camelCaseTableName = '';
+    protected string $camelCaseTableName = '';
 
     /**
      * @var Where
@@ -43,12 +43,12 @@ class Select extends AbstractBaseQuery
     /**
      * @var string
      */
-    protected $havingOperator = 'AND';
+    protected string $havingOperator = 'AND';
 
     /**
      * @var bool
      */
-    protected $isDistinct = false;
+    protected bool $isDistinct = false;
 
     /**
      * @var Where
@@ -58,21 +58,21 @@ class Select extends AbstractBaseQuery
     /**
      * @var JoinQuery
      */
-    protected $joinQuery;
+    protected JoinQuery $joinQuery;
 
     /**
      * @var ColumnQuery
      */
-    protected $columnQuery;
+    protected ColumnQuery $columnQuery;
 
     /**
-     * @var ParentQuery
+     * @var AbstractBaseQuery
      */
-    protected $parentQuery;
+    protected AbstractBaseQuery $parentQuery;
 
     /**
-     * @param string $table
-     * @param array  $columns
+     * @param null $table
+     * @param array|null $columns
      */
     public function __construct($table = null, array $columns = null)
     {
@@ -98,7 +98,7 @@ class Select extends AbstractBaseQuery
     /**
      * @return string
      */
-    public function partName()
+    public function partName(): string
     {
         return 'SELECT';
     }
@@ -237,11 +237,11 @@ class Select extends AbstractBaseQuery
     }
 
     /**
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Column
+     * @return array
      *
      * @throws QueryException
      */
-    public function getColumns()
+    public function getColumns(): array
     {
         return $this->columnQuery->getColumns();
     }
@@ -511,11 +511,11 @@ class Select extends AbstractBaseQuery
     }
 
     /**
-     * @return ParentQuery
+     * @return AbstractBaseQuery|null
      */
-    public function getParentQuery()
+    public function getParentQuery(): AbstractBaseQuery|null
     {
-        return $this->parentQuery;
+        return $this->parentQuery ?? null;
     }
 
     /**
@@ -533,16 +533,15 @@ class Select extends AbstractBaseQuery
     /**
      * @param string $column
      * @param string $direction
-     * @param null   $table
+     * @param null $table
      *
      * @return $this
+     * @throws QueryException
      */
-    public function orderBy($column, $direction = OrderBy::ASC, $table = null)
+    public function orderBy(string $column, string $direction = OrderBy::ASC, $table = null): static
     {
         $current = parent::orderBy($column, $direction, $table);
-        if ($this->getParentQuery() != null) {
-            $this->getParentQuery()->orderBy($column, $direction, \is_null($table) ? $this->getTable() : $table);
-        }
+        $this->getParentQuery()?->orderBy($column, $direction, \is_null($table) ? $this->getTable() : $table);
         return $current;
     }
 }

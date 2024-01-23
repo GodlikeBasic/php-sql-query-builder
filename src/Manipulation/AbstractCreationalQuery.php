@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Manipulation;
+namespace Sql\QueryBuilder\Manipulation;
 
 /**
  * Class AbstractCreationalQuery.
@@ -21,8 +21,8 @@ abstract class AbstractCreationalQuery extends AbstractBaseQuery
     protected $values = [];
 
     /**
-     * @param string $table
-     * @param array  $values
+     * @param null $table
+     * @param array|null $values
      */
     public function __construct($table = null, array $values = null)
     {

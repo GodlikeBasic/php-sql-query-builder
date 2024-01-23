@@ -8,16 +8,17 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Syntax;
+namespace Tests\Sql\QueryBuilder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Manipulation\Select;
-use NilPortugues\Sql\QueryBuilder\Syntax\Where;
-use NilPortugues\Tests\Sql\QueryBuilder\Manipulation\Resources\DummyQuery;
+use Sql\QueryBuilder\Manipulation\QueryException;
+use Sql\QueryBuilder\Manipulation\Select;
+use Sql\QueryBuilder\Syntax\Where;
+use Tests\Sql\QueryBuilder\Manipulation\Resources\DummyQuery;
 
 /**
  * Class WhereTest.
  */
-class WhereTest extends \PHPUnit_Framework_TestCase
+class WhereTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Where
@@ -27,22 +28,22 @@ class WhereTest extends \PHPUnit_Framework_TestCase
     /**
      * @var string
      */
-    protected $whereClass = '\NilPortugues\Sql\QueryBuilder\Syntax\Where';
+    protected $whereClass = '\Sql\QueryBuilder\Syntax\Where';
 
     /**
      * @var string
      */
-    protected $columnClass = '\NilPortugues\Sql\QueryBuilder\Syntax\Column';
+    protected $columnClass = '\Sql\QueryBuilder\Syntax\Column';
 
     /**
      * @var string
      */
-    protected $queryException = '\NilPortugues\Sql\QueryBuilder\Manipulation\QueryException';
+    protected $queryException = '\Sql\QueryBuilder\Manipulation\QueryException';
 
     /**
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $query = new DummyQuery();
         $query->setTable('users');
@@ -378,7 +379,7 @@ class WhereTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldThrowExceptionOnUnknownConjunction()
     {
-        $this->setExpectedException($this->queryException);
+        $this->expectException($this->queryException);
         $this->where->conjunction('NOT_VALID_CONJUNCTION');
     }
 
@@ -397,6 +398,7 @@ class WhereTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @throws QueryException
      */
     public function itShouldSetNotExistsCondition()
     {

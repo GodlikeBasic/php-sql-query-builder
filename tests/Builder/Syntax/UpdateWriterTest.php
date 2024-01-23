@@ -8,15 +8,15 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Builder\Syntax;
+namespace Tests\Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Update;
+use Sql\QueryBuilder\Builder\GenericBuilder;
+use Sql\QueryBuilder\Manipulation\Update;
 
 /**
  * Class UpdateWriterTest.
  */
-class UpdateWriterTest extends \PHPUnit_Framework_TestCase
+class UpdateWriterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var array
@@ -36,12 +36,12 @@ class UpdateWriterTest extends \PHPUnit_Framework_TestCase
     /**
      * @var string
      */
-    private $exceptionClass = '\NilPortugues\Sql\QueryBuilder\Manipulation\QueryException';
+    private $exceptionClass = '\Sql\QueryBuilder\Manipulation\QueryException';
 
     /**
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->writer = new GenericBuilder();
         $this->query = new Update();
@@ -58,7 +58,7 @@ class UpdateWriterTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldThrowQueryException()
     {
-        $this->setExpectedException($this->exceptionClass);
+        $this->expectException($this->exceptionClass);
 
         $this->query->setTable('user');
         $this->writer->write($this->query);

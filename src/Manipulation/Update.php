@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Manipulation;
+namespace Sql\QueryBuilder\Manipulation;
 
 /**
  * Class Update.
@@ -18,27 +18,27 @@ class Update extends AbstractCreationalQuery
     /**
      * @var int
      */
-    protected $limitStart;
+    protected int $limitStart;
 
     /**
      * @var array
      */
-    protected $orderBy = [];
+    protected array $orderBy = [];
 
     /**
      * @return string
      */
-    public function partName()
+    public function partName(): string
     {
         return 'UPDATE';
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getLimitStart()
+    public function getLimitStart(): int|null
     {
-        return $this->limitStart;
+        return $this->limitStart ?? null;
     }
 
     /**

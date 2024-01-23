@@ -8,15 +8,16 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Manipulation;
+namespace Sql\QueryBuilder\Manipulation;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\OrderBy;
-use NilPortugues\Sql\QueryBuilder\Syntax\QueryPartInterface;
-use NilPortugues\Sql\QueryBuilder\Syntax\SyntaxFactory;
-use NilPortugues\Sql\QueryBuilder\Syntax\Table;
-use NilPortugues\Sql\QueryBuilder\Syntax\Where;
+use Sql\QueryBuilder\Builder\BuilderInterface;
+use Sql\QueryBuilder\Syntax\OrderBy;
+use Sql\QueryBuilder\Syntax\QueryPartInterface;
+use Sql\QueryBuilder\Syntax\SyntaxFactory;
+use Sql\QueryBuilder\Syntax\Table;
+use Sql\QueryBuilder\Syntax\Where;
+
 // Builder injects itself into query for convestion to SQL string.
-use NilPortugues\Sql\QueryBuilder\Builder\BuilderInterface;
 
 /**
  * Class AbstractBaseQuery.
@@ -26,22 +27,22 @@ abstract class AbstractBaseQuery implements QueryInterface, QueryPartInterface
     /**
      * @var string
      */
-    protected $comment = '';
+    protected string $comment = '';
 
     /**
-     * @var \NilPortugues\Sql\QueryBuilder\Builder\BuilderInterface
+     * @var BuilderInterface
      */
-    protected $builder;
+    protected BuilderInterface $builder;
+
+    /**
+     * @var Table
+     */
+    protected Table $table;
 
     /**
      * @var string
      */
-    protected $table;
-
-    /**
-     * @var string
-     */
-    protected $whereOperator = 'AND';
+    protected string $whereOperator = 'AND';
 
     /**
      * @var Where
@@ -51,27 +52,27 @@ abstract class AbstractBaseQuery implements QueryInterface, QueryPartInterface
     /**
      * @var array
      */
-    protected $joins = [];
+    protected array $joins = [];
 
     /**
      * @var int
      */
-    protected $limitStart;
+    protected int $limitStart;
 
     /**
      * @var int
      */
-    protected $limitCount;
+    protected int $limitCount;
 
     /**
      * @var array
      */
-    protected $orderBy = [];
+    protected array $orderBy = [];
 
     /**
      * @return Where
      */
-    protected function filter()
+    protected function filter(): Where
     {
         if (!isset($this->where)) {
             $this->where = QueryFactory::createWhere($this);
@@ -87,7 +88,7 @@ abstract class AbstractBaseQuery implements QueryInterface, QueryPartInterface
      *
      * @return $this
      */
-    final public function setBuilder(BuilderInterface $builder)
+    final public function setBuilder(BuilderInterface $builder): static
     {
         $this->builder = $builder;
 
@@ -99,11 +100,8 @@ abstract class AbstractBaseQuery implements QueryInterface, QueryPartInterface
      *
      * @throws \RuntimeException when builder has not been injected
      */
-    final public function getBuilder()
+    final public function getBuilder(): BuilderInterface
     {
-        if (!$this->builder) {
-            throw new \RuntimeException('Query builder has not been injected with setBuilder');
-        }
 
         return $this->builder;
     }
@@ -130,7 +128,7 @@ abstract class AbstractBaseQuery implements QueryInterface, QueryPartInterface
      *
      * @return string
      */
-    public function getSql($formatted = false)
+    public function getSql(bool $formatted = false): string
     {
         if ($formatted) {
             return $this->getBuilder()->writeFormatted($this);
@@ -142,34 +140,34 @@ abstract class AbstractBaseQuery implements QueryInterface, QueryPartInterface
     /**
      * @return string
      */
-    abstract public function partName();
+    abstract public function partName(): string;
 
     /**
-     * @return Where
+     * @return Where|null
      */
-    public function getWhere()
+    public function getWhere(): Where|null
     {
-        return $this->where;
+        return $this->where ?? null;
     }
 
     /**
-     * @return Table
+     * @return null|Table
      */
-    public function getTable()
+    public function getTable(): null|Table
     {
-        return $this->table;
+        return $this->table ?? null;
     }
 
     /**
-     * @param string $table
+     * @param string|Table $table
      *
      * @return $this
      */
-    public function setTable($table)
+    public function setTable(string|Table $table): static
     {
-        if ( ! (is_object($table) && is_a($table, Table::class))) {
+        if (!(is_object($table) && is_a($table, Table::class))) {
             $table = new Table(
-                (string) $table
+                (string)$table
             );
         }
 
@@ -182,8 +180,9 @@ abstract class AbstractBaseQuery implements QueryInterface, QueryPartInterface
      * @param string $whereOperator
      *
      * @return Where
+     * @throws QueryException
      */
-    public function where($whereOperator = 'AND')
+    public function where(string $whereOperator = 'AND'): Where
     {
         if (!isset($this->where)) {
             $this->where = $this->filter();
@@ -197,7 +196,7 @@ abstract class AbstractBaseQuery implements QueryInterface, QueryPartInterface
     /**
      * @return string
      */
-    public function getWhereOperator()
+    public function getWhereOperator(): string
     {
         if (!isset($this->where)) {
             $this->where = $this->filter();
@@ -209,11 +208,11 @@ abstract class AbstractBaseQuery implements QueryInterface, QueryPartInterface
     /**
      * @param string $column
      * @param string $direction
-     * @param null   $table
+     * @param null $table
      *
      * @return $this
      */
-    public function orderBy($column, $direction = OrderBy::ASC, $table = null)
+    public function orderBy(string $column, string $direction = OrderBy::ASC, $table = null): static
     {
         $newColumn = array($column);
         $column = SyntaxFactory::createColumn($newColumn, \is_null($table) ? $this->getTable() : $table);
@@ -225,17 +224,17 @@ abstract class AbstractBaseQuery implements QueryInterface, QueryPartInterface
     /**
      * @return int
      */
-    public function getLimitCount()
+    public function getLimitCount(): int|null
     {
-        return $this->limitCount;
+        return $this->limitCount ?? null;
     }
 
     /**
      * @return int
      */
-    public function getLimitStart()
+    public function getLimitStart(): int|null
     {
-        return $this->limitStart;
+        return $this->limitStart ?? null;
     }
 
     /**
@@ -243,11 +242,11 @@ abstract class AbstractBaseQuery implements QueryInterface, QueryPartInterface
      *
      * @return $this
      */
-    public function setComment($comment)
+    public function setComment(string $comment): static
     {
         // Make each line of the comment prefixed with "--",
         // and remove any trailing whitespace.
-        $comment = '-- '.str_replace("\n", "\n-- ", \rtrim($comment));
+        $comment = '-- ' . str_replace("\n", "\n-- ", \rtrim($comment));
 
         // Trim off any trailing "-- ", to ensure that the comment is valid.
         $this->comment = \rtrim($comment, '- ');
@@ -262,7 +261,7 @@ abstract class AbstractBaseQuery implements QueryInterface, QueryPartInterface
     /**
      * @return string
      */
-    public function getComment()
+    public function getComment(): string
     {
         return $this->comment;
     }

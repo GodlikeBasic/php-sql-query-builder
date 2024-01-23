@@ -8,9 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Manipulation;
+namespace Sql\QueryBuilder\Manipulation;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\QueryPartInterface;
+use Sql\QueryBuilder\Syntax\QueryPartInterface;
+use Sql\QueryBuilder\Syntax\Table;
 
 /**
  * Class Minus.
@@ -48,7 +49,7 @@ class Minus implements QueryInterface, QueryPartInterface
     }
 
     /**
-     * @return \NilPortugues\Sql\QueryBuilder\Manipulation\Select
+     * @return \Sql\QueryBuilder\Manipulation\Select
      */
     public function getFirst()
     {
@@ -56,7 +57,7 @@ class Minus implements QueryInterface, QueryPartInterface
     }
 
     /**
-     * @return \NilPortugues\Sql\QueryBuilder\Manipulation\Select
+     * @return \Sql\QueryBuilder\Manipulation\Select
      */
     public function getSecond()
     {
@@ -66,9 +67,9 @@ class Minus implements QueryInterface, QueryPartInterface
     /**
      * @throws QueryException
      *
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Table
+     * @return Table
      */
-    public function getTable()
+    public function getTable(): Table
     {
         throw new QueryException('MINUS does not support tables');
     }
@@ -76,7 +77,7 @@ class Minus implements QueryInterface, QueryPartInterface
     /**
      * @throws QueryException
      *
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Where
+     * @return \Sql\QueryBuilder\Syntax\Where
      */
     public function getWhere()
     {
@@ -86,7 +87,7 @@ class Minus implements QueryInterface, QueryPartInterface
     /**
      * @throws QueryException
      *
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Where
+     * @return \Sql\QueryBuilder\Syntax\Where
      */
     public function where()
     {

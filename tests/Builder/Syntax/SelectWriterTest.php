@@ -8,17 +8,18 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Builder\Syntax;
+namespace Tests\Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\Column;
-use NilPortugues\Sql\QueryBuilder\Syntax\OrderBy;
-use NilPortugues\Sql\QueryBuilder\Manipulation\Select;
-use NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder;
+use Sql\QueryBuilder\Manipulation\QueryException;
+use Sql\QueryBuilder\Syntax\Column;
+use Sql\QueryBuilder\Syntax\OrderBy;
+use Sql\QueryBuilder\Manipulation\Select;
+use Sql\QueryBuilder\Builder\GenericBuilder;
 
 /**
  * Class SelectWriterTest.
  */
-class SelectWriterTest extends \PHPUnit_Framework_TestCase
+class SelectWriterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var GenericBuilder
@@ -33,12 +34,12 @@ class SelectWriterTest extends \PHPUnit_Framework_TestCase
     /**
      * @var string
      */
-    private $exceptionClass = '\NilPortugues\Sql\QueryBuilder\Manipulation\QueryException';
+    private string $exceptionClass = '\Sql\QueryBuilder\Manipulation\QueryException';
 
     /**
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->writer = new GenericBuilder();
         $this->query = new Select();
@@ -86,10 +87,11 @@ SQL;
 
     /**
      * @test
+     * @throws QueryException
      */
     public function itShouldThrowExceptionWhenGettingColumnsButNoTableIsSet()
     {
-        $this->setExpectedException($this->exceptionClass);
+        $this->expectException($this->exceptionClass);
 
         $this->query = new Select();
         $this->query->getColumns();
@@ -537,7 +539,7 @@ SQL;
      */
     public function itShouldThrowExceptionInvalidHavingConjunction()
     {
-        $this->setExpectedException($this->exceptionClass);
+        $this->expectException($this->exceptionClass);
 
         $this->query
             ->setTable('user')

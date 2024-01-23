@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Builder\Syntax;
+namespace Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Builder\GenericBuilder;
-use NilPortugues\Sql\QueryBuilder\Manipulation\AbstractBaseQuery;
+use Sql\QueryBuilder\Builder\GenericBuilder;
+use Sql\QueryBuilder\Manipulation\AbstractBaseQuery;
 
 /**
  * Class AbstractBaseWriter.
@@ -21,20 +21,20 @@ abstract class AbstractBaseWriter
     /**
      * @var GenericBuilder
      */
-    protected $writer;
+    protected GenericBuilder $writer;
 
     /**
      * @var PlaceholderWriter
      */
-    protected $placeholderWriter;
+    protected PlaceholderWriter $placeholderWriter;
 
     /**
      * @var ColumnWriter
      */
-    protected $columnWriter;
+    protected ColumnWriter $columnWriter;
 
     /**
-     * @param GenericBuilder    $writer
+     * @param GenericBuilder $writer
      * @param PlaceholderWriter $placeholder
      */
     public function __construct(GenericBuilder $writer, PlaceholderWriter $placeholder)
@@ -50,7 +50,7 @@ abstract class AbstractBaseWriter
      *
      * @return string
      */
-    public static function writeQueryComment(AbstractBaseQuery $class)
+    public static function writeQueryComment(AbstractBaseQuery $class): string
     {
         $comment = '';
         if ('' !== $class->getComment()) {
@@ -62,16 +62,17 @@ abstract class AbstractBaseWriter
 
     /**
      * @param AbstractBaseQuery $class
-     * @param GenericBuilder    $writer
+     * @param GenericBuilder $writer
      * @param PlaceholderWriter $placeholderWriter
-     * @param array             $parts
+     * @param array $parts
      */
     public static function writeWhereCondition(
         AbstractBaseQuery $class,
-        $writer, PlaceholderWriter
-        $placeholderWriter,
-        array &$parts
-    ) {
+        GenericBuilder    $writer,
+        PlaceholderWriter $placeholderWriter,
+        array             &$parts
+    ): void
+    {
         if (!is_null($class->getWhere())) {
             $whereWriter = WriterFactory::createWhereWriter($writer, $placeholderWriter);
             $parts[] = "WHERE {$whereWriter->writeWhere($class->getWhere())}";
@@ -81,13 +82,14 @@ abstract class AbstractBaseWriter
     /**
      * @param AbstractBaseQuery $class
      * @param PlaceholderWriter $placeholderWriter
-     * @param array             $parts
+     * @param array $parts
      */
     public static function writeLimitCondition(
         AbstractBaseQuery $class,
         PlaceholderWriter $placeholderWriter,
-        array &$parts
-    ) {
+        array             &$parts
+    ): void
+    {
         if (!is_null($class->getLimitStart())) {
             $start = $placeholderWriter->add($class->getLimitStart());
             $parts[] = "LIMIT {$start}";

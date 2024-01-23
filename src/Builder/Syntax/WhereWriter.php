@@ -1,11 +1,11 @@
 <?php
 
-namespace NilPortugues\Sql\QueryBuilder\Builder\Syntax;
+namespace Sql\QueryBuilder\Builder\Syntax;
 
-use NilPortugues\Sql\QueryBuilder\Manipulation\Select;
-use NilPortugues\Sql\QueryBuilder\Syntax\Column;
-use NilPortugues\Sql\QueryBuilder\Syntax\SyntaxFactory;
-use NilPortugues\Sql\QueryBuilder\Syntax\Where;
+use Sql\QueryBuilder\Manipulation\Select;
+use Sql\QueryBuilder\Syntax\Column;
+use Sql\QueryBuilder\Syntax\SyntaxFactory;
+use Sql\QueryBuilder\Syntax\Where;
 
 /**
  * Class WhereWriter.
@@ -67,7 +67,7 @@ class WhereWriter extends AbstractBaseWriter
      * @param Where $where
      * @param array $whereArray
      *
-     * @return array
+     * @return void
      */
     protected function writeWhereMatches(Where $where, array &$whereArray)
     {
@@ -109,7 +109,7 @@ class WhereWriter extends AbstractBaseWriter
      * @param Where $where
      * @param array $whereArray
      *
-     * @return array
+     * @return void
      */
     protected function writeWhereIns(Where $where, array &$whereArray)
     {
@@ -148,7 +148,7 @@ class WhereWriter extends AbstractBaseWriter
      * @param Where $where
      * @param array $whereArray
      *
-     * @return array
+     * @return void
      */
     protected function writeWhereNotIns(Where $where, array &$whereArray)
     {
@@ -162,7 +162,7 @@ class WhereWriter extends AbstractBaseWriter
      * @param Where $where
      * @param array $whereArray
      *
-     * @return array
+     * @return void
      */
     protected function writeWhereBetweens(Where $where, array &$whereArray)
     {
@@ -188,7 +188,7 @@ class WhereWriter extends AbstractBaseWriter
      * @param Where $where
      * @param array $whereArray
      *
-     * @return array
+     * @return void
      */
     protected function writeWhereNotBetweens(Where $where, array &$whereArray)
     {
@@ -214,7 +214,7 @@ class WhereWriter extends AbstractBaseWriter
      * @param Where $where
      * @param array $whereArray
      *
-     * @return array
+     * @return void
      */
     protected function writeWhereComparisons(Where $where, array &$whereArray)
     {
@@ -261,7 +261,7 @@ class WhereWriter extends AbstractBaseWriter
      * @param Where $where
      * @param array $whereArray
      *
-     * @return array
+     * @return void
      */
     protected function writeWhereIsNulls(Where $where, array &$whereArray)
     {
@@ -298,7 +298,7 @@ class WhereWriter extends AbstractBaseWriter
      * @param Where $where
      * @param array $whereArray
      *
-     * @return array
+     * @return void
      */
     protected function writeWhereIsNotNulls(Where $where, array &$whereArray)
     {
@@ -312,7 +312,7 @@ class WhereWriter extends AbstractBaseWriter
      * @param Where $where
      * @param array $whereArray
      *
-     * @return array
+     * @return void
      */
     protected function writeWhereBooleans(Where $where, array &$whereArray)
     {
@@ -336,7 +336,7 @@ class WhereWriter extends AbstractBaseWriter
      * @param Where $where
      * @param array $whereArray
      *
-     * @return array
+     * @return void
      */
     protected function writeExists(Where $where, array &$whereArray)
     {
@@ -368,7 +368,7 @@ class WhereWriter extends AbstractBaseWriter
      * @param Where $where
      * @param array $whereArray
      *
-     * @return array
+     * @return void
      */
     protected function writeNotExists(Where $where, array &$whereArray)
     {
@@ -382,7 +382,7 @@ class WhereWriter extends AbstractBaseWriter
      * @param Where $where
      * @param array $whereArray
      *
-     * @return array
+     * @return void
      */
     protected function writeSubWheres(Where $where, array &$whereArray)
     {

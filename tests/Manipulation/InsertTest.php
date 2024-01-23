@@ -8,14 +8,14 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Tests\Sql\QueryBuilder\Manipulation;
+namespace Tests\Sql\QueryBuilder\Manipulation;
 
-use NilPortugues\Sql\QueryBuilder\Manipulation\Insert;
+use Sql\QueryBuilder\Manipulation\Insert;
 
 /**
  * Class InsertTest.
  */
-class InsertTest extends \PHPUnit_Framework_TestCase
+class InsertTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Insert
@@ -24,7 +24,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     /**
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->query = new Insert();
     }
@@ -60,6 +60,6 @@ class InsertTest extends \PHPUnit_Framework_TestCase
 
         $columns = $this->query->getColumns();
 
-        $this->assertInstanceOf('NilPortugues\Sql\QueryBuilder\Syntax\Column', $columns[0]);
+        $this->assertInstanceOf('Sql\QueryBuilder\Syntax\Column', $columns[0]);
     }
 }

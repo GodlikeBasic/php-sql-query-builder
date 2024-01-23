@@ -8,12 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\Sql\QueryBuilder\Manipulation;
+namespace Sql\QueryBuilder\Manipulation;
 
-use NilPortugues\Sql\QueryBuilder\Syntax\Table;
-use NilPortugues\Sql\QueryBuilder\Syntax\Where;
-use NilPortugues\Sql\QueryBuilder\Syntax\Column;
-use NilPortugues\Sql\QueryBuilder\Syntax\SyntaxFactory;
+use Sql\QueryBuilder\Syntax\Table;
+use Sql\QueryBuilder\Syntax\Where;
+use Sql\QueryBuilder\Syntax\Column;
+use Sql\QueryBuilder\Syntax\SyntaxFactory;
 
 /**
  * Class JoinQuery.
@@ -59,11 +59,11 @@ class JoinQuery
     }
 
     /**
-     * @param string $table
+     * @param string|Table  $table
      *
      * @return $this
      */
-    public function setTable($table)
+    public function setTable(string|Table $table): static
     {
         $this->select->setTable($table);
 
@@ -252,7 +252,7 @@ class JoinQuery
     }
 
     /**
-     * @return \NilPortugues\Sql\QueryBuilder\Syntax\Where
+     * @return \Sql\QueryBuilder\Syntax\Where
      */
     public function getJoinCondition()
     {
@@ -260,7 +260,7 @@ class JoinQuery
     }
 
     /**
-     * @param \NilPortugues\Sql\QueryBuilder\Syntax\Where $joinCondition
+     * @param \Sql\QueryBuilder\Syntax\Where $joinCondition
      *
      * @return $this
      */
