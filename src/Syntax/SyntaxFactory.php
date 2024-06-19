@@ -17,25 +17,22 @@ use Sql\QueryBuilder\Manipulation\QueryException;
  */
 final class SyntaxFactory
 {
-    /**
-     * Creates a collection of Column objects.
-     *
-     * @param array $arguments
-     * @param Table|null $table
-     *
-     * @return array
-     * @throws QueryException
-     * @throws QueryException
-     * @throws QueryException
-     */
-    public static function createColumns(array &$arguments, $table = null)
-    {
+	/**
+	 * Creates a collection of Column objects.
+	 *
+	 * @param array $arguments
+	 * @param string|Table|null $table
+	 *
+	 * @return array
+	 * @throws QueryException
+	 */
+    public static function createColumns(array $arguments, string|Table $table = null): array
+	{
         $createdColumns = [];
 
         foreach ($arguments as $index => $column) {
             if (!is_object($column)) {
-                $newColumn = array($column);
-                $column = self::createColumn($newColumn, $table);
+                $column = self::createColumn(array($column), $table);
                 if (!is_numeric($index)) {
                     $column->setAlias($index);
                 }
@@ -49,17 +46,17 @@ final class SyntaxFactory
         return \array_filter($createdColumns);
     }
 
-    /**
-     * Creates a Column object.
-     *
-     * @param array $argument
-     * @param null|Table $table
-     *
-     * @return Column
-     * @throws QueryException
-     */
-    public static function createColumn(array &$argument, $table = null)
-    {
+	/**
+	 * Creates a Column object.
+	 *
+	 * @param array $argument
+	 * @param string|Table|null $table
+	 *
+	 * @return Column
+	 * @throws QueryException
+	 */
+    public static function createColumn(array $argument, string|Table $table = null): Column
+	{
         $columnName = \array_values($argument);
         $columnName = $columnName[0];
 

@@ -132,9 +132,8 @@ class JoinQuery
 
         if (! $this->joinExists($select->getTable())) {
             if (!$selfColumn instanceof Column) {
-                $newColumn = array($selfColumn);
                 $selfColumn = SyntaxFactory::createColumn(
-                    $newColumn,
+					array($selfColumn),
                     $this->select->getTable()
                 );
             }
@@ -319,6 +318,9 @@ class JoinQuery
         $joins = [];
 
         foreach ($this->joins as $sub_joins) {
+			/**
+			 * @var $join JoinQuery
+			 */
             foreach ($sub_joins as $join) {
                 $joins = \array_merge($joins, [$join], $join->getAllJoins());
             }

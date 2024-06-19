@@ -34,13 +34,13 @@ class Column implements QueryPartInterface
      */
     protected string|null $alias;
 
-    /**
-     * @param null $name
-     * @param string|null  $table
-     * @param string|null $alias
-     * @throws QueryException
-     */
-    public function __construct(string $name, ?string $table, ?string $alias = '')
+	/**
+	 * @param string $name
+	 * @param string|Table $table
+	 * @param string|null $alias
+	 * @throws QueryException
+	 */
+    public function __construct(string $name, string|Table $table, ?string $alias = '')
     {
         $this->setName($name);
         $this->setTable($table);
@@ -70,7 +70,7 @@ class Column implements QueryPartInterface
      */
     public function setName(string $name): static
     {
-        $this->name = (string) $name;
+        $this->name = $name;
 
         return $this;
     }
@@ -83,23 +83,26 @@ class Column implements QueryPartInterface
         return $this->table;
     }
 
-    /**
-     * @param string|null $table
-     *
-     * @return $this
-     */
-    public function setTable(?string $table): static
+	/**
+	 * @param string|Table $table
+	 *
+	 * @return $this
+	 */
+    public function setTable(string|Table $table): static
     {
-        $this->table = SyntaxFactory::createTable($table);
+		if(is_string($table))
+        	$this->table = SyntaxFactory::createTable($table);
+		else
+			$this->table = $table;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAlias()
-    {
+	/**
+	 * @return string|null
+	 */
+    public function getAlias(): ?string
+	{
         return $this->alias;
     }
 
@@ -122,7 +125,7 @@ class Column implements QueryPartInterface
             throw new QueryException("Can't use alias because column name is ALL (*)");
         }
 
-        $this->alias = (string) $alias;
+        $this->alias = $alias;
 
         return $this;
     }
@@ -132,8 +135,8 @@ class Column implements QueryPartInterface
      *
      * @return bool
      */
-    public function isAll()
-    {
+    public function isAll(): bool
+	{
         return $this->getName() == self::ALL;
     }
 }

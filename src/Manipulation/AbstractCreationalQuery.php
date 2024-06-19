@@ -18,7 +18,7 @@ abstract class AbstractCreationalQuery extends AbstractBaseQuery
     /**
      * @var array
      */
-    protected $values = [];
+    protected array $values = [];
 
     /**
      * @param null $table
@@ -38,8 +38,8 @@ abstract class AbstractCreationalQuery extends AbstractBaseQuery
     /**
      * @return array
      */
-    public function getValues()
-    {
+    public function getValues(): array
+	{
         return $this->values;
     }
 
@@ -48,8 +48,8 @@ abstract class AbstractCreationalQuery extends AbstractBaseQuery
      *
      * @return $this
      */
-    public function setValues(array $values)
-    {
+    public function setValues(array $values): static
+	{
         $this->values = \array_filter($values, function($value) {
             if (is_int($value)) {
                 return true;

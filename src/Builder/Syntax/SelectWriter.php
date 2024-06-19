@@ -22,23 +22,22 @@ use Sql\QueryBuilder\Syntax\SyntaxFactory;
  */
 class SelectWriter extends AbstractBaseWriter
 {
-    /**
-     * @param        $alias
-     * @param Select $select
-     *
-     * @return Column
-     */
-    public function selectToColumn($alias, Select $select)
-    {
+	/**
+	 * @param        $alias
+	 * @param Select $select
+	 *
+	 * @return Column
+	 * @throws QueryException
+	 */
+    public function selectToColumn($alias, Select $select): Column
+	{
         $selectAsColumn = $this->write($select);
 
         if (!empty($selectAsColumn)) {
             $selectAsColumn = '('.$selectAsColumn.')';
         }
 
-        $column = array($alias => $selectAsColumn);
-
-        return SyntaxFactory::createColumn($column, null);
+        return SyntaxFactory::createColumn( array($alias => $selectAsColumn));
     }
 
     /**
@@ -105,6 +104,9 @@ class SelectWriter extends AbstractBaseWriter
         }
 
         $columns = $select->getColumns();
+		/**
+		 * @var $column Column
+		 */
         $column = \array_pop($columns);
         $columnList = $column->getName();
 

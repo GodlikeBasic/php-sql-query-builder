@@ -25,6 +25,8 @@ class Update extends AbstractCreationalQuery
      */
     protected array $orderBy = [];
 
+	public bool $ignore = false;
+
     /**
      * @return string
      */
@@ -32,6 +34,12 @@ class Update extends AbstractCreationalQuery
     {
         return 'UPDATE';
     }
+
+	public function Ignore(bool $ignore = true): static
+	{
+		$this->ignore = $ignore;
+		return $this;
+	}
 
     /**
      * @return int|null

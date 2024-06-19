@@ -11,6 +11,7 @@
 namespace Sql\QueryBuilder\Builder;
 
 use ReflectionException;
+use Sql\QueryBuilder\Builder\Syntax\AbstractBaseWriter;
 use Sql\QueryBuilder\Builder\Syntax\WriterFactory;
 use Sql\QueryBuilder\Manipulation\AbstractBaseQuery;
 use Sql\QueryBuilder\Manipulation\Intersect;
@@ -97,6 +98,13 @@ class GenericBuilder implements BuilderInterface
     {
         $this->placeholderWriter = WriterFactory::createPlaceholderWriter();
     }
+
+
+	public function UnnamedPlaceholder(): static
+	{
+		$this->placeholderWriter->enabledUnnamed();
+		return $this;
+	}
 
     /**
      * @param null $table
@@ -246,7 +254,11 @@ class GenericBuilder implements BuilderInterface
         if (false === empty($this->queryWriterArray[$queryPart])) {
             $this->createQueryObject($queryPart);
 
-            return $this->queryWriterInstances[$queryPart]->write($query);
+			/**
+			 * @var $writer AbstractBaseWriter
+			 */
+			$writer = $this->queryWriterInstances[$queryPart];
+            return $writer->write($query);
         }
 
         throw new \RuntimeException('Query builder part not defined.');

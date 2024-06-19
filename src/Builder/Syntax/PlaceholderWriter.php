@@ -20,6 +20,8 @@ class PlaceholderWriter
      */
     protected $counter = 1;
 
+	protected bool $named_placeholders = true;
+
     /**
      * @var array
      */
@@ -36,7 +38,7 @@ class PlaceholderWriter
     /**
      * @return $this
      */
-    public function reset()
+    public function reset(): static
     {
         $this->counter = 1;
         $this->placeholders = [];
@@ -44,17 +46,31 @@ class PlaceholderWriter
         return $this;
     }
 
+	public function enabledUnnamed(): static
+	{
+		$this->named_placeholders = false;
+		return $this;
+	}
+
     /**
      * @param $value
      *
      * @return string
      */
-    public function add($value)
-    {
-        $placeholderKey = ':v'.$this->counter;
-        $this->placeholders[$placeholderKey] = $this->setValidSqlValue($value);
+    public function add($value): string
+	{
+		if($this->named_placeholders)
+		{
+			$placeholderKey = ':v' . $this->counter;
+			$this->placeholders[$placeholderKey] = $this->setValidSqlValue($value);
 
-        ++$this->counter;
+			++$this->counter;
+		}
+		else
+		{
+			$placeholderKey = '?';
+			$this->placeholders[] = $this->setValidSqlValue($value);
+		}
 
         return $placeholderKey;
     }

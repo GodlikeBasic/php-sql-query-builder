@@ -131,8 +131,7 @@ class WhereWriter extends AbstractBaseWriter
         $collection = [];
 
         foreach ($where->$method() as $column => $values) {
-            $newColumn = array($column);
-            $column = SyntaxFactory::createColumn($newColumn, $where->getTable());
+            $column = SyntaxFactory::createColumn(array($column), $where->getTable());
             $column = $this->columnWriter->writeColumn($column);
 
             $values = $this->writer->writeValues($values);

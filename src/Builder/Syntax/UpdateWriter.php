@@ -13,6 +13,7 @@ namespace Sql\QueryBuilder\Builder\Syntax;
 use Sql\QueryBuilder\Manipulation\QueryException;
 use Sql\QueryBuilder\Manipulation\Update;
 use Sql\QueryBuilder\Syntax\SyntaxFactory;
+use Sql\QueryBuilder\Syntax\WithoutPlaceholder;
 
 /**
  * Class UpdateWriter.
@@ -33,8 +34,12 @@ class UpdateWriter extends AbstractBaseWriter
             throw new QueryException('No values to update in Update query.');
         }
 
+		$ignore = '';
+		if($update->ignore)
+			$ignore = " IGNORE ";
+
         $parts = array(
-            'UPDATE '.$this->writer->writeTable($update->getTable()).' SET ',
+            'UPDATE '.$ignore.$this->writer->writeTable($update->getTable()).' SET ',
             $this->writeUpdateValues($update),
         );
 
@@ -54,10 +59,11 @@ class UpdateWriter extends AbstractBaseWriter
     {
         $assigns = [];
         foreach ($update->getValues() as $column => $value) {
-            $newColumn = array($column);
-            $column = $this->columnWriter->writeColumn(SyntaxFactory::createColumn($newColumn, $update->getTable()));
-
-            $value = $this->writer->writePlaceholderValue($value);
+            $column = $this->columnWriter->writeColumn(SyntaxFactory::createColumn(array($column), $update->getTable()));
+			if(is_a($value, WithoutPlaceholder::class))
+				$value = $value->value;
+			else
+            	$value = $this->writer->writePlaceholderValue($value);
 
             $assigns[] = "$column = $value";
         }

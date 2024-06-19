@@ -285,9 +285,7 @@ class Where
             return $column;
         }
 
-        $newColumn = [$column];
-
-        return SyntaxFactory::createColumn($newColumn, $this->getTable());
+        return SyntaxFactory::createColumn([$column], $this->getTable());
     }
 
     /**

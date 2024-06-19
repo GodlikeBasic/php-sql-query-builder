@@ -11,6 +11,7 @@
 namespace Sql\QueryBuilder\Builder\Syntax;
 
 use Sql\QueryBuilder\Builder\GenericBuilder;
+use Sql\QueryBuilder\Manipulation\QueryException;
 use Sql\QueryBuilder\Manipulation\Select;
 use Sql\QueryBuilder\Syntax\Column;
 use Sql\QueryBuilder\Syntax\SyntaxFactory;
@@ -85,35 +86,35 @@ class ColumnWriter
         return $selectAsColumns;
     }
 
-    /**
-     * @param Select $select
-     *
-     * @return array
-     */
-    public function writeValueAsColumns(Select $select)
-    {
+	/**
+	 * @param Select $select
+	 *
+	 * @return array
+	 * @throws QueryException
+	 */
+    public function writeValueAsColumns(Select $select): array
+	{
         $valueAsColumns = $select->getColumnValues();
         $newColumns = [];
 
         if (!empty($valueAsColumns)) {
             foreach ($valueAsColumns as $alias => $value) {
                 $value = $this->writer->writePlaceholderValue($value);
-                $newValueColumn = array($alias => $value);
-
-                $newColumns[] = SyntaxFactory::createColumn($newValueColumn, null);
+                $newColumns[] = SyntaxFactory::createColumn(array($alias => $value), null);
             }
         }
 
         return $newColumns;
     }
 
-    /**
-     * @param Select $select
-     *
-     * @return array
-     */
-    public function writeFuncAsColumns(Select $select)
-    {
+	/**
+	 * @param Select $select
+	 *
+	 * @return array
+	 * @throws QueryException
+	 */
+    public function writeFuncAsColumns(Select $select): array
+	{
         $funcAsColumns = $select->getColumnFuncs();
         $newColumns = [];
 
@@ -122,8 +123,7 @@ class ColumnWriter
                 $funcName = $value['func'];
                 $funcArgs = (!empty($value['args'])) ? '('.implode(', ', $value['args']).')' : '';
 
-                $newFuncColumn = array($alias => $funcName.$funcArgs);
-                $newColumns[] = SyntaxFactory::createColumn($newFuncColumn, null);
+                $newColumns[] = SyntaxFactory::createColumn(array($alias => $funcName.$funcArgs));
             }
         }
 
